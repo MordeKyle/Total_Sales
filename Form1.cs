@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 /*Program: Total Sales
   Author: Kyle McBride A02609917
   Date: 04/28/2014
@@ -23,6 +24,56 @@ namespace Total_Sales
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void displayButton_Click(object sender, EventArgs e)
+        {
+            //declaring array
+            const int SIZE = 100;
+            decimal[] sales = new decimal[SIZE];
+
+            //varible to hold amount stored in array
+            int count = 0;
+
+            decimal additionHolder = 0;
+
+            //declaring streamreader
+            StreamReader inputFile;
+
+            //opening the sales file
+            inputFile = File.OpenText("../../Sales.txt");
+
+            try
+            {
+                //pull contents from file into array while there is still items
+                //to pull and the array isnt full
+                while (!inputFile.EndOfStream && count < sales.Length)
+                {
+                    sales[count] = decimal.Parse(inputFile.ReadLine());
+                    count++;
+                }
+                //close the file
+                inputFile.Close();
+
+                //display contents in listbox
+                for (int index = 0; index < count; index++)
+                {
+                    outputListBox.Items.Add(sales[index]);
+                }
+
+                
+                //add all the values
+                for (int index = 0; index < sales.Length; index++)
+                {
+                    additionHolder += sales[index];
+                }
+                //display total of all values
+                outputListBox.Items.Add("Total =" + additionHolder);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

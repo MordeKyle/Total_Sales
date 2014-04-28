@@ -1,5 +1,11 @@
 ﻿***CHANGE LOG***
 
+Version: 1.1 Working Robin
+04/28/2014 @ 03:20
+•added items to form
+•created array and displayed it in listbox
+•created calculations
+
 Version: 1.0 Beggining Robin
 04/28/2014 @ 02:14
 •Creating Repository
